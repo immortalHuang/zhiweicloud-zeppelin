@@ -6,5 +6,5 @@ ADD jdk-8u131-linux-x64.tar.gz /opt
 ENV JAVA_HOME /opt/jdk1.8.0_131
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN cd /opt/zeppelin && bin/zeppelin-daemon.sh start
-RUN while true;do echo hello;done
+RUN while true;do echo helo;done
 EXPOSE 8080
