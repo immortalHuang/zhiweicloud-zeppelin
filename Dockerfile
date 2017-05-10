@@ -4,3 +4,4 @@ RUN cd /opt && wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2
 ENV SPARK_HOME /opt/spark
 ENV PATH $PATH:$SPARK_HOME/bin
 RUN /opt/zeppelin-0.7.1-bin-all/bin/zeppelin-daemon.sh start
+RUN echo hello
