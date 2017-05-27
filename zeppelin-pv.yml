@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: zeppelin
+  labels:
+    type: zeppelin
+spec:
+  capacity:
+    storage: 3G
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.255.113
+    path: "/home/nfs-share/code/zeppelin"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: zeppelin
+  namespace: dp
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2G
+  selector:
+    matchLabels:
+      type: zeppelin

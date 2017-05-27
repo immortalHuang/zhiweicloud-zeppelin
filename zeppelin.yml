@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zeppelin
+  namespace: dp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zeppelin
+    spec:
+      containers:
+        - name: zeppelin
+          imagePullPolicy: IfNotPresent
+          image: immortalhuang/zhiweicloud-zeppelin
+          volumeMounts:
+          - mountPath: "/opt"
+            name: code
+          - mountPath: "/etc/localtime"
+            name: tz-config
+          command: ["/opt/zeppelin-0.7.1-bin-all/bin/zeppelin.sh","--config","/opt/zeppelin-0.7.1-bin-all/conf"]
+
+      volumes:
+        - name: code
+          persistentVolumeClaim:
+            claimName: zeppelin
+        - name: tz-config
+          hostPath:
+            path: /etc/localtime
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zeppelin-service
+  namespace: dp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: zeppelin
