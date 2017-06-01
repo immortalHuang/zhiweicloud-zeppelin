@@ -19,7 +19,7 @@ spec:
             name: code
           - mountPath: "/etc/localtime"
             name: tz-config
-          command: ["/opt/zeppelin-0.7.1-bin-all/bin/zeppelin.sh","--config","/opt/zeppelin-0.7.1-bin-all/conf"]
+          command: ["/opt/zeppelin/bin/zeppelin.sh","--config","/opt/zeppelin/conf"]
 
       volumes:
         - name: code
